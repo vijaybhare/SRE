@@ -13,7 +13,9 @@ from __future__ import annotations
 import asyncio
 import json
 import os
+import sys
 import tempfile
+import traceback
 import uuid
 from dataclasses import dataclass
 from pathlib import Path
@@ -98,7 +100,8 @@ def _run_assess(job_id: str, change_path: Path, rubric_path: Path | None, model:
         }
         _set_job(job_id, status="done", result=result)
     except Exception as exc:  # noqa: BLE001 - surface any failure to the poller
-        _set_job(job_id, status="error", error=str(exc))
+        print(f"PRR assess job {job_id} failed:\n{traceback.format_exc()}", file=sys.stderr)
+        _set_job(job_id, status="error", error=f"{type(exc).__name__}: {exc}")
     finally:
         change_path.unlink(missing_ok=True)
         if rubric_path:
@@ -124,7 +127,8 @@ def _run_normalize(job_id: str, input_paths: list[Path], model: str) -> None:
         }
         _set_job(job_id, status="done", result=result)
     except Exception as exc:  # noqa: BLE001
-        _set_job(job_id, status="error", error=str(exc))
+        print(f"PRR normalize job {job_id} failed:\n{traceback.format_exc()}", file=sys.stderr)
+        _set_job(job_id, status="error", error=f"{type(exc).__name__}: {exc}")
     finally:
         for p in input_paths:
             p.unlink(missing_ok=True)
