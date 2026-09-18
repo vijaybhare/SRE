@@ -13,4 +13,4 @@ ENV PRR_WEB_PORT=7860
 
 EXPOSE 7860
 
-CMD ["prr-readiness-web"]
+CMD ["sh", "-c", "PRR_WEB_PORT=${PORT:-7860} prr-readiness-web"]
