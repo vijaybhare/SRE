@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PRR Readiness</title>
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+  <header>
+    <h1>Production Readiness Review</h1>
+    <p class="subtitle">Assess a change against SRE readiness criteria before go-live.</p>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab-btn active" data-tab="assess">Assess a change</button>
+    <button class="tab-btn" data-tab="rubric">Build custom criteria</button>
+  </nav>
+
+  <main>
+    <section id="tab-assess" class="tab-panel active">
+      <form id="assess-form">
+        <label class="field">
+          <span>Change / release document <small>(PDF or Word)</small></span>
+          <input type="file" name="change" accept=".pdf,.docx" required />
+        </label>
+        <label class="field">
+          <span>Custom criteria rubric <small>(optional — JSON from the "Build custom criteria" tab; default uses the built-in SRE Workbook rubric)</small></span>
+          <input type="file" name="rubric" accept=".json" />
+        </label>
+        <label class="field">
+          <span>Model <small>(optional)</small></span>
+          <input type="text" name="model" placeholder="e.g. gpt-4o" />
+        </label>
+        <button type="submit">Run PRR assessment</button>
+      </form>
+
+      <div id="assess-status" class="status" hidden></div>
+      <div id="assess-result" class="result" hidden></div>
+    </section>
+
+    <section id="tab-rubric" class="tab-panel">
+      <p class="hint">
+        Upload your own SRE readiness standards (PDF/Word/Excel) to turn them into a
+        criteria rubric, instead of using the built-in default. Download the result
+        and upload it back on the "Assess a change" tab.
+      </p>
+      <form id="rubric-form">
+        <label class="field">
+          <span>Standards document(s)</span>
+          <input type="file" name="files" accept=".pdf,.docx,.xlsx,.xlsm" multiple required />
+        </label>
+        <label class="field">
+          <span>Model <small>(optional)</small></span>
+          <input type="text" name="model" placeholder="e.g. gpt-4o" />
+        </label>
+        <button type="submit">Generate criteria rubric</button>
+      </form>
+
+      <div id="rubric-status" class="status" hidden></div>
+      <div id="rubric-result" class="result" hidden></div>
+    </section>
+  </main>
+
+  <script src="/app.js"></script>
+</body>
+</html>
