@@ -1,0 +1,199 @@
+:root {
+  --bg: #f7f8fa;
+  --panel: #ffffff;
+  --border: #e2e5ea;
+  --text: #1c2128;
+  --muted: #5b6572;
+  --accent: #2f6fed;
+  --ready: #1a7f37;
+  --ready-bg: #e6f4ea;
+  --conditional: #9a6700;
+  --conditional-bg: #fff3d6;
+  --not-ready: #cf222e;
+  --not-ready-bg: #fde8e8;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1216;
+    --panel: #171b21;
+    --border: #2a2f37;
+    --text: #e6e9ee;
+    --muted: #99a2ad;
+    --ready-bg: #0f2a1a;
+    --conditional-bg: #2b2107;
+    --not-ready-bg: #2c1214;
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+header {
+  padding: 28px 20px 16px;
+  max-width: 880px;
+  margin: 0 auto;
+}
+
+h1 { margin: 0 0 4px; font-size: 1.5rem; }
+.subtitle { margin: 0; color: var(--muted); }
+
+.tabs {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  gap: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+.tab-btn {
+  border: none;
+  background: none;
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  color: var(--muted);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+}
+
+.tab-btn.active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+main {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.tab-panel { display: none; }
+.tab-panel.active { display: block; }
+
+form {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field span { font-weight: 600; font-size: 0.9rem; }
+.field small { font-weight: 400; color: var(--muted); }
+
+input[type="file"], input[type="text"] {
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text);
+}
+
+button[type="submit"] {
+  align-self: flex-start;
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+button[type="submit"]:disabled { opacity: 0.6; cursor: default; }
+
+.hint { color: var(--muted); }
+
+.status {
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  color: var(--muted);
+}
+
+.status.error { color: var(--not-ready); border-color: var(--not-ready); }
+
+.result { margin-top: 20px; }
+
+.gate-banner {
+  border-radius: 10px;
+  padding: 16px 20px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-bottom: 16px;
+}
+
+.gate-banner.ready { background: var(--ready-bg); color: var(--ready); }
+.gate-banner.conditional { background: var(--conditional-bg); color: var(--conditional); }
+.gate-banner.not-ready { background: var(--not-ready-bg); color: var(--not-ready); }
+
+.gate-banner .pct { font-weight: 400; font-size: 0.9rem; opacity: 0.85; }
+
+.section-title { font-size: 1rem; margin: 20px 0 8px; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+}
+
+th { color: var(--muted); font-weight: 600; }
+tr:last-child td { border-bottom: none; }
+
+.finding {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-left-width: 4px;
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+}
+
+.finding.pass { border-left-color: var(--ready); }
+.finding.partial { border-left-color: var(--conditional); }
+.finding.fail { border-left-color: var(--not-ready); }
+.finding.not_applicable, .finding.not_evaluated { border-left-color: var(--border); }
+
+.finding-id { font-weight: 600; font-size: 0.85rem; color: var(--muted); }
+.finding-req { margin: 4px 0; }
+.finding-meta { font-size: 0.85rem; color: var(--muted); }
+
+.download-link {
+  display: inline-block;
+  margin-top: 12px;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+pre.rubric-preview {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+  overflow: auto;
+  max-height: 320px;
+  font-size: 0.82rem;
+}
